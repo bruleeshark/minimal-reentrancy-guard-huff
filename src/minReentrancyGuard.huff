@@ -1,0 +1,38 @@
+/// @title minReentrancyGuard.huff
+/// @author rachelgdoteth (bruleeshark) https://twitter.com/RachelGdoteth
+
+/// @dev The nonReentrant macro first checks the reentrancy state in storage slot 0x00. 
+/// If the state is 1 (entered), it jumps to the revert macro to terminate the execution.
+/// If the state is 0 (not entered), it sets the state to 1 to mark the contract as entered.
+/// The endNonReentrant macro is used at the end of the function to reset the reentrancy state back to 0.
+/// The revert macro is used to revert the transaction.
+
+/// reentrancyGuard.huff
+
+/// Storage layout:
+/// 0x00: reentrancy state (0 for not entered, 1 for entered)
+
+define macro nonReentrant():
+  /// Load the reentrancy state from storage
+  0x00 sload
+  /// If state is 1 (entered), revert
+  0x01 jumpi $revert
+  /// Otherwise, set state to entered
+  0x01 0x00 sstore
+end macro
+
+define macro endNonReentrant():
+  /// Set the reentrancy state back to not entered
+  0x00 0x00 sstore
+end macro
+
+define macro revert():
+  0x00 revert
+end macro
+
+define guard .entry:
+  /// Entry point for the contract
+  nonReentrant() /// apply the nonReentrant macro at the start of the function
+  /// ... rest of the function logic
+  endNonReentrant() /// reset the reentrancy state at the end of the function
+end guard
