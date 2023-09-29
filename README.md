@@ -6,7 +6,11 @@ Integrate this ReentrancyGuard.huff contract into your project by including it i
 
 Then, import this huff contract in your other .huff contracts and "bracket" the function you wish to guard from reentrancy, with the reentrancy guard template functions found in ReentrancyGuard.huff.
 
-Alternatively, use this as a Huff language learning tool by comparing and contrasting with the (superior, and clearly Error Coded) solmate-esque implementation found at this link; https://github.com/huff-language/huffmate/blob/main/src/utils/ReentrancyGuard.huff 
+Alternatively, use this as a Huff language learning tool by comparing and contrasting with the (superior, and clearly Error Coded) solmate-esque implementation found at this link; 
+https://github.com/huff-language/huffmate/blob/main/src/utils/ReentrancyGuard.huff 
+compare vs this project's minReentrancyGuard.huff; <- the thing I actually wrote for the Huff hackathon, September 2023.
+https://github.com/bruleeshark/minimal-reentrancy-guard-huff/blob/main/src/minReentrancyGuard.huff
+
 
 ## Modification:
 Modify the :function_call label to include the actual function code that you want to protect against reentrancy attacks.
